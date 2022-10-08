@@ -1,12 +1,12 @@
 
-(
 // Ambisonic settings
 // set the order of ambisonic encoding here
+(
 ~ambi_order  = 2;
 ~ambi_nHOA  = (pow(~ambi_order+1,2)).asInteger;
 
 
-// customized startup file for ambisonics encoding of superdirt orbits
+// customized booting of durt for ambisonics encoding of superdirt orbits
 s.reboot { // server options are only updated on reboot
 	// configure the sound server: here you could add hardware specific options
 	// see http://doc.sccode.org/Classes/ServerOptions.html
@@ -64,7 +64,6 @@ s.reboot { // server options are only updated on reboot
 
 		// optional, needed for convenient access from sclang:
 		(
-
 		~d1 = ~dirt.orbits[0]; ~d2 = ~dirt.orbits[1]; ~d3 = ~dirt.orbits[2];
 		~d4 = ~dirt.orbits[3];
 		);
@@ -72,7 +71,7 @@ s.reboot { // server options are only updated on reboot
 
 	s.latency = 0.3; // increase this if you get "late" messages
 };
-)
+
 
 // add effect for encoding the orbits
 (
@@ -89,36 +88,40 @@ s.reboot { // server options are only updated on reboot
 	)
 },
 );
-)
+);
 
 // make SynthDef for encoding the orbit
-(
-var numChannels =  ~dirt.numChannels;
-HOABinaural.loadbinauralIRs(s);
 
-SynthDef("ambipan" ++ numChannels, { |out, azim=0, elev=0|
+//~numChannels =  ~dirt.numChannels;
+HOABinaural.loadbinauralIRs(s);
+"imported_IR".postln;
+(
+SynthDef("ambipan" ++ ~dirt.numChannels, { |out, azim=0, elev=0|
 
 	// make azim and elev values of 1 correspond to an angle of pi/2 in rad
 	var azimut = azim * 0.5pi;
 	var elevation = elev * 0.5pi;
 	var signal;
 
-	signal = In.ar(out, numChannels);
+	signal = In.ar(out,~dirt.numChannels);
 	signal = signal.sum;
 	signal =HOAEncoder.ar(~ambi_order,signal,azimut,elevation);
     ReplaceOut.ar(out, signal);
+	"created_ambipan".postln;
       }).add;
-)
+);
 
+(
 // routing of the decoding
 // create Ndef
 Ndef(\dirty).ar(~dirt.numChannels);
 // route each orbit to Ndef
 ~dirt.orbits.do { |each| each.outBus = Ndef(\dirty).bus };
+"created_Ndef".postln;
 
 // create SynthDef for decoding
 // decoder can be changed regarding the use case
-(
+
 SynthDef(\decoder,
       {
               |inbus=0|
@@ -126,9 +129,8 @@ SynthDef(\decoder,
               Out.ar(0, HOABinaural.ar(~ambi_order, In.ar(Ndef(\dirty).bus, ~ambi_nHOA)));
       }
 ).send
-)
+);
 
 // add decoder to the tail of the server
 ~decoder = Synth(\decoder, [\inbus, Ndef(\dirty).bus], s, addAction: 'addToTail');
-);
 

@@ -1,0 +1,13 @@
+-- declaring variables to be able to use them as parameters in superdirt
+let azim = pF "azim"
+let elev = pF "elev"
+
+-- using azim and elev to place the sound
+d1 silence
+d1 $ sound "bd sd bd clap" # azim  "<0 1> [-1 0.4 -0.6]/3 <2 -1>" # elev "<1 -1.7> -0.25 0.5"
+d1 $  n "[0 <7 ~ 6>] [2 1*3 5*2]/3 [2 3]" # sound "cpu" # azim  "<0 -1> [-1 0.4 0.6]/3 <2 0.7>" # elev "<1 -1.7> -0.25 0.5"
+
+d2 silence
+d2 $  "[arpy:0 ~ arpy:0*2] <arpy:2*3 arpy:5*2> [arpy:0 <arpy:9 arpy:6>]*2 <[arpy:2 arpy:5] arpy:2*3>" # azim "<0 ~ -1> [1 1.2] [2 0.5 -0.7]/3"
+
+hush
