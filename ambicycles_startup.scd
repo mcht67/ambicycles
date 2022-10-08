@@ -1,6 +1,6 @@
-
 // Ambisonic settings
 // set the order of ambisonic encoding here
+({
 (
 ~ambi_order  = 2;
 ~ambi_nHOA  = (pow(~ambi_order+1,2)).asInteger;
@@ -71,7 +71,9 @@ s.reboot { // server options are only updated on reboot
 
 	s.latency = 0.3; // increase this if you get "late" messages
 };
+);
 
+8.wait;
 
 // add effect for encoding the orbits
 (
@@ -131,6 +133,9 @@ SynthDef(\decoder,
 ).send
 );
 
+1.wait;
+
 // add decoder to the tail of the server
 ~decoder = Synth(\decoder, [\inbus, Ndef(\dirty).bus], s, addAction: 'addToTail');
+}.fork;)
 
