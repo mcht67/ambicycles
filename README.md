@@ -6,7 +6,11 @@ Ambicycles makes it easy to use Tidal Cycles with an ambisonics setup. With ambi
 2. Replace the Supercollider startup-file with the file "ambicycles_startup.scd"
 3. Restart Supercollider
 4. Declare Variables azim and elev in your Tidal file (You can use the file "ambicycles_example.tidal"):
+
       let azim = pF "azim"
+
       let elev = pF "elev"
+
 5. Now, you should be able to access azimut and elevation as effectparameters in Tidal like this:
+
       d1 $ sound "bd sd bd clap" # azim  "<0 1> [-1 0.4 -0.6]/3 <2 -1>" # elev "<1 -1.7> -0.25 0.5"
