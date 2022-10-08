@@ -28,3 +28,6 @@ Ambicycles consists of a customized supercollider startup file based on the defa
 After starting dirt. Ambicycles adds an effect module called "ambipan", which inherits the encoding stage. The effect uses the variables "azim" and "elev" in Tidal as parameters. Afterwards an Ndef "AmbiOut" is created and all OutBuses of the orbits are connected to it. At last the decoder is added to the tail of the server, getting it's input from "AmbiOut".
 
 Ambicycles uses SC-HOA for de-/encoding. Any other ambisonics encoding should work as well. 
+
+# ERROR: Message 'addModule' not understood.
+Dirt has to be running before ambicycles tries to add the effect module "ambipan". If this error occurs Supercollider was probably trying to add the module while dirt was not yet running. There is a line in the codes that says "10.wait,". You can increase the number to make Supercollider wait longer before trying to add the module.
