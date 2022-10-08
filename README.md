@@ -1,5 +1,5 @@
 # Ambicycles
-Ambicycles makes it easy to use Tidal Cycles with an ambisonics setup. With ambicycles you can place the sounds of your live coding session in a three dimensional sound field. The direction the sound is coming from is determined by two angles. These two angles (azimut and elevation) can be accessed as effect parameters directly from Tidal Cycles. You can make patterns of different angles similar to other effect paramteres in Tidal Cycles to create changing placements of the sounds. This version works with headphones only, but exchanging the decoder it should easily be ajustable for any ambisonics setup.
+Ambicycles makes it easy to use Tidal Cycles with an ambisonics setup. With ambicycles you can place the sounds of your live coding session in a three dimensional sound field. The direction the sound is coming from is determined by two angles. These two angles (azimut and elevation) can be accessed as effect parameters directly from Tidal Cycles. You can make patterns of different angles similar to other effect paramteres in Tidal Cycles to create changing placements of the sounds. This version works with headphones only, but exchanging the decoder it should easily be adjustable for any ambisonics setup.
 
 # Setup
 1. Setup Tidal Cycles as described here: http://tidalcycles.org/docs/
