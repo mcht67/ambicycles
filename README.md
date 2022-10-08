@@ -25,7 +25,7 @@ Ambicycles makes it easy to use Tidal Cycles with an ambisonics setup. With ambi
 # Conceptual structure
 Ambicycles consists of a customized supercollider startup file based on the default one that comes with Tidal. It starts a multichannel instance of Tidals dirt-syntheziser. The number of channels is dependant on the ambisonic order you choose (the default is 2nd order). Choose the ambisonics order as well as the number of Tidal orbits regarding your needs and hardware resources.
 
-After starting dirt. Ambicycles adds an effect module called "ambipan", which inherits the encoding stage. The effect uses the variables "azim" and "elev" in Tidal as parameters. Afterwards an Ndef "AmbiOut" is created and all OutBuses of the orbits are connected to it. At last the decoder is added to the tail of the server, getting it's input from "AmbiOut".
+After starting dirt Ambicycles adds an effect module called "ambipan", which inherits the encoding stage. The effect uses the variables "azim" and "elev" in Tidal as parameters. Afterwards an Ndef "AmbiOut" is created and all OutBuses of the orbits are connected to it. At last the decoder is added to the tail of the server, getting it's input from "AmbiOut".
 
 Ambicycles uses SC-HOA for de-/encoding. Any other ambisonics encoding should work as well. 
 
