@@ -54,7 +54,7 @@
 				// for example: ~dirt.loadSoundFiles("/Users/myUserName/Dirt/samples/*");
 
 				//load user sound librarys
-				~dirt.loadSoundFiles("C:/Users/Dell/Documents/Tidal Cycles/Samples/samples-extra/*");
+				//~dirt.loadSoundFiles("");
 
 				// s.sync; // optionally: wait for samples to be read
 				~dirt.start(57120, 0 !4);   // start listening on port 57120, create two busses each sending audio to channel 0
@@ -70,9 +70,8 @@
 		};
 	);
 
-	// waiting time before Supercollider tries to add effect module "ambipan"
-	// increase the number if you get the ERROR: 'addModule' not understood.
-	10.wait;
+	s.sync;
+
 	"loading ambicycles".postln;
 
 	// add effect module for encoding the orbits
@@ -127,7 +126,7 @@
 		).send
 	);
 
-	1.wait;
+    s.sync;
 
 	// add decoder to the tail of the server
 	~decoder = Synth(\decoder, [\inbus, Ndef(\AmbiOut).bus], s, addAction: 'addToTail');
